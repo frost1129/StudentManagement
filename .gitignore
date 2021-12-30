@@ -1,2 +1,4 @@
 .vs/
-trieFunction.cpp
+main.cpp
+trie*.cpp
+trie*.exe

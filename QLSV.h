@@ -3,37 +3,49 @@
 #include<fstream>
 #include<iomanip>
 using namespace std;
-struct HocVien	//- Set value tranh loi C26495 khi dinh nghia ham -//
+struct HocVien
 {
-	int id = NULL;
-	string firstName="";
-	string lastName="";
-	int birdDay[3] = {NULL,NULL,NULL}; // nn/tt/nnnn
-	string idClass ="";
-	double point = NULL;
+	int id{};
+	string firstName;
+	string lastName;
+	int birdDay[3]{};// nn/tt/nnnn
+	string idClass{};
+	double point{};
 
-	HocVien* link = NULL;
+	HocVien* link{};
 };
 struct Class
 {
-	string id="";
-	string name="";
-	string timeTable[3][7];
-	int fee = NULL;
-	int SLHV = 0;
-	HocVien* first = NULL;
+	string id{};
+	string name;
+	string timeTable[3][7]{};
+	int fee{};
+	int SLHV{};
+	HocVien* first{};
 
-	Class* link = NULL;
+	Class* link{};
 };
 //- Ham xu ly HocVien -//
 void initHV(HocVien*& first)
 {
 	first = NULL;
 }
+
+
+
+
 HocVien* createHV()
 {
 	HocVien* p;
 	p = new HocVien;
+	p->id = NULL;
+	p->firstName = "";
+	p->lastName = "";
+	for (int i = 0; i < 3; i++)
+		p->birdDay[i] = NULL;
+	p->point = NULL;
+	p->idClass = "";
+	p->link = NULL;
 	return p;
 }
 HocVien* addFirstHV(HocVien*& First, HocVien*& add) // canoc
@@ -75,6 +87,12 @@ Class* createClass()
 {
 	Class* p;
 	p = new Class;
+	p->id = "";
+	p->name = "";
+	p->SLHV = 0;
+	p->first = NULL;
+	p->fee = NULL;
+	p->link = NULL;
 	return p;
 }
 Class* addFirstClass(Class*& First, Class*& add)
@@ -132,10 +150,10 @@ void inputClassFromFile(Class*& First)
 		cout << "Doc File thanh cong!!!" << endl;
 	}
 	else
-		cout << "Khong mo duoc file lophoc.txt!!!"<<endl;
+		cout << "Khong mo duoc file lophoc.txt!!!" << endl;
 	readFile.close();
 }
-void inputHVFromFile( HocVien*& DShv,int &SL, Class *&firstclass)
+void inputHVFromFile(HocVien*& DShv, int& SL, Class*& firstclass)
 {
 	ifstream readFile;
 	readFile.open("hocvien.txt", ios::in);
@@ -178,7 +196,7 @@ void inputHVFromFile( HocVien*& DShv,int &SL, Class *&firstclass)
 	readFile.close();
 }
 //-in ra console-//
-void outputListClass(Class *first)
+void outputListClass(Class* first)
 {
 	if (first == NULL)
 	{
@@ -192,7 +210,7 @@ void outputListClass(Class *first)
 	cout << "----------------------------------------------------------------------------------------------------------" << endl;
 	while (p != NULL)
 	{
-		cout<< setw(10) << i++ << "|" << setw(10) << p->id << setw(30) << p->name << setw(23) << p->SLHV << setw(28) << p->fee << endl;
+		cout << setw(10) << i++ << "|" << setw(10) << p->id << setw(30) << p->name << setw(23) << p->SLHV << setw(28) << p->fee << endl;
 		p = p->link;
 	}
 }
@@ -214,3 +232,30 @@ void outputListHV(HocVien* first)
 		p = p->link;
 	}
 }
+//-sap xep- heapsort//
+HocVien* getAddressHV(HocVien* first, int i) //- xuat dia chi tai vi tri i
+{
+	HocVien* p;
+	p = first;
+	for (int j = 0; j < i; j++)
+		p = p->link;
+	return p;
+}
+void shift(HocVien*& first, HocVien* a[], int point[])
+{
+}
+void HeapSortHV(HocVien*& first, int SLHV)
+{
+	if (first == NULL)
+		return;
+	//- anh xa point vao danh sach dac-//
+	int* point = new int[SLHV];
+	HocVien* p;
+	p = first;
+	for (int i = 0; i < SLHV; i++)
+	{
+		point[i] = p->point;
+		p = p->link;
+	}
+}
+

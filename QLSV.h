@@ -259,3 +259,38 @@ void HeapSortHV(HocVien*& first, int SLHV)
 	}
 }
 
+
+//water
+// cau 3:
+
+HocVien* inputFromKeyboard(HocVien* dsHV, Class* dsLop)
+{
+	HocVien* x = createHV();
+	cout << "Nhap ma so sinh vien: ";
+	cin >> x->id;
+	if (checkMaHV(dsHV, x->id) == true)
+	{
+		cout << "Ma so sinh vien bi trung. Vui long nhap lai\n";
+		cout << "Nhap ma so sinh vien: ";
+		cin >> x->id;
+	}
+	cin.ignore();
+	cout << "Nhap ho & ten dem: ";
+	getline(cin, x->firstName);
+	cout << "Nhap ten: ";
+	getline(cin, x->lastName);
+	cout << "Nhap ngay thang nam sinh (dd/mm/yyyy): ";
+	cin >> x->birdDay[0] >> x->birdDay[1] >> x->birdDay[2];
+	cin.ignore();
+	cout << "Nhap ma lop: ";
+	getline(cin, x->idClass);
+	if (checkMaLop(dsLop, x->idClass) == false)
+	{
+		cout << "Ma lop chua ton tai, vui long kiem tra lai\n";
+		cout << "Nhap ma lop: ";
+		getline(cin, x->idClass);
+	}
+	cout << "Nhap diem trung binh: ";
+	cin >> x->point;
+	return x;
+}
